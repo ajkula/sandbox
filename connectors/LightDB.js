@@ -16,6 +16,12 @@ module.exports = class DB {
     Q.drain = () => { logule.info('DB READY') }
   }
 
+  chain(task, callback) {
+    // ensure no requests concurrencie
+    logule.warn(task)
+    return callback()
+  }
+
   get(id) {
     return this.db.get(id) || null
   }
