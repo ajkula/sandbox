@@ -1,12 +1,19 @@
+const async = require('async')
+const logule = require('logule').init(module)
+
 module.exports = class DB {
   
   constructor() {
     this.idCount = 0
     this.db = new Map()
+    this.index = require('./indexDB.json') || {};
     Object.entries(require('./store-mock.json')).forEach(([k, v]) => {
       this.db.set(k, v)
       this.idCount++
     });
+    this.db.forEach(this.mapElements)
+    const Q = async.queue(this.chain, 1)
+    Q.drain = () => { logule.info('DB READY') }
   }
 
   get(id) {
@@ -23,5 +30,25 @@ module.exports = class DB {
         
       }
     }
+  }
+
+  freeId() {
+    // boucle de 0 à Math.max(id)
+      // verifie la présence de item dans l'interval id/object de this.db
+        // retourne le 1er num absent
+  }
+
+  indexCreate(tag) {
+    if (((this.index)[tag] || {}).ids || []) {
+      this.db.forEach(item => {
+        if (item.find(tab)) {
+            this.index[tab].ids.push('toutes les ids corr.')
+        }
+      })
+    }
+  }
+
+  mapElements(val, key, map) {
+    logule.info(`m[${key}] = ${value}`);
   }
 }

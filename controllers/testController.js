@@ -38,9 +38,11 @@ module.exports = class test extends abstract {
             logule.error(`ID: ${id} is undefined`);
             res.json({status: 404, message: `${id} undefined`})
         }
-        const id = body.id
+        const id = body.id.toString()
+        body.id = body.id.toString()
         this.container.storeModel.set(id, body)
-        res.json(req.body)
+        logule.info(`ID: ${id} Recorded!`);
+        res.json({ object: this.container.storeModel.get(id), id: id })
         
     }
 }
