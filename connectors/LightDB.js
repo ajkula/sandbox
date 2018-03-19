@@ -47,7 +47,7 @@ module.exports = class DB {
   indexCreate(tag) {
     if (((this.index)[tag] || {}).ids || []) {
       this.db.forEach(item => {
-        if (item.find(tab)) {
+        if (item.find(object => { return Object.values(object).indexOf(tag) })) { // callback return les correspondances :Boolean
             this.index[tab].ids.push('toutes les ids corr.')
         }
       })
