@@ -1,9 +1,9 @@
-const abstract = require('./Abstract')
+const Abstract = require('./Abstract')
 const logule = require('logule').init(module)
 const saveStore = require('fs')
 // .createWriteStream(global.filePath)
 
-module.exports = class test extends abstract {
+module.exports = class test extends Abstract {
     constructor(container) {
         super(container)
         this.container = container;
